@@ -20,16 +20,25 @@ if __name__ == "__main__":
 
 		sentence = recognizer.get_voice_input()
 
-		if sentence == "good bye":
+		if sentence == "good bye" or sentence == "goodbye":
+			recognizer.speak("See you next time")
 			break
 
 		compare = Compare(INSTRUCTIONS, DB().get_data())
-		instruction = compare.getInstruction(sentence)
-		symbol = compare.getStock(sentence)
+		instructions = compare.getInstruction(sentence)
+		symbols = compare.getStock(sentence)
 
+		for symbol in symbols:
+			instruction = instructions[0]
 
-		recognizer.speak("You are instructing to {0} {1}. Is it correct?".format(instruction[0], symbol[0]))
-		confirmation = recognizer.get_voice_input()
+			recognizer.speak(
+				"You are instructing to {0} {1}. Is it correct?".format(instruction, symbol)
+			)
+			confirmation = recognizer.get_voice_input()
 
-		if "yes" in confirmation.lower():
-			recognizer.speak("Done")
+			if "yes" in confirmation.lower():
+				recognizer.speak("Done")
+				break
+			elif "cancel" in confirmation.lower():
+				recognizer.speak("Sorry")
+				break

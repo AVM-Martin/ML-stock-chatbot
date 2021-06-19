@@ -22,11 +22,14 @@ class SpeechRecognition():
 					self.recog.adjust_for_ambient_noise(source2, duration=0.5)
 
 					audioListen = self.recog.listen(source2)
-					getText = self.recog.recognize_google(audioListen)
-					getText = getText.lower()
+					result = self.recog.recognize_google(audioListen)
 
+					getText = result.lower()
 					print("You say:", getText)
 					return getText
 
 			except speechRecog.UnknownValueError:
-				print("Google Speech Recognition could not understand audio")
+				self.speak("Sorry, I could not understand your command")
+
+			except TypeError:
+				self.speak("I'm waiting")

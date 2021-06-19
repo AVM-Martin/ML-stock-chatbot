@@ -11,7 +11,7 @@ class Compare:
 		#return max top 3
 		value = []
 		for dat, freq in data:
-			value.append( (nltk.edit_distance(dat, inp), -freq, dat) )
+			value.append( (nltk.edit_distance(dat.upper(), inp.upper()), -freq, dat) )
 		value = sorted(value)
 
 		n = min(len(data), 3)
