@@ -16,7 +16,7 @@ class Compare:
 
 		n = min(len(data), 3)
 		result = []
-		for i in range(3):
+		for i in range(n):
 			result.append(value[i][2])
 		return result
 
@@ -25,5 +25,5 @@ class Compare:
 		return self.getTopSimilar(self.stock_list, inp)
 
 
-	def getInstruction(instruction_list, inp):
+	def getInstruction(self, inp):
 		return self.getTopSimilar(self.instruction_list, inp)
