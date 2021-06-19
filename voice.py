@@ -16,7 +16,7 @@ class SpeechRecognition():
 	def get_voice_input(self):
 		while(True):
 			try:
-				with sr.Microphone() as source2:
+				with speechRecog.Microphone() as source2:
 
 					recog.adjust_for_ambient_noise(source2, duration=0.5)
 
