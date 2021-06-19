@@ -5,12 +5,13 @@ import pyttsx3
 class SpeechRecognition():
 	def __init__(self):
 		self.recog = speechRecog.Recognizer()
+		self.eng = pyttsx3.init()
 
 
 	def speak(self, command):
-		eng = pyttsx3.init()
-		eng.say(command)
-		eng.runAndWait()
+		print("Bot say:", command)
+		self.eng.say(command)
+		self.eng.runAndWait()
 
 
 	def get_voice_input(self):
@@ -18,13 +19,13 @@ class SpeechRecognition():
 			try:
 				with speechRecog.Microphone() as source2:
 
-					recog.adjust_for_ambient_noise(source2, duration=0.5)
+					self.recog.adjust_for_ambient_noise(source2, duration=0.5)
 
-					audioListen = recog.listen(source2)
-					getText = recog.recognize_google(audioListen)
+					audioListen = self.recog.listen(source2)
+					getText = self.recog.recognize_google(audioListen)
 					getText = getText.lower()
 
-					print("You say: "+getText)
+					print("You say:", getText)
 					return getText
 
 			except speechRecog.UnknownValueError:

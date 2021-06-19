@@ -8,7 +8,6 @@ from voice import SpeechRecognition
 INSTRUCTIONS = [
 	("buy", 0),
 	("sell", 0),
-	("bye", 0),
 ]
 
 
@@ -21,12 +20,13 @@ if __name__ == "__main__":
 
 		sentence = recognizer.get_voice_input()
 
+		if sentence == "good bye":
+			break
+
 		compare = Compare(INSTRUCTIONS, DB().get_data())
 		instruction = compare.getInstruction(sentence)
 		symbol = compare.getStock(sentence)
 
-		if instruction[0] == "bye":
-			break
 
 		recognizer.speak("You are instructing to {0} {1}. Is it correct?".format(instruction[0], symbol[0]))
 		confirmation = recognizer.get_voice_input()
